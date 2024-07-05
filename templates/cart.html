@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Licious</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Global styles */
+        body {
+            background-color: #121212;   
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #1c1c1c; /* Dark theme */
+            color: #ffffff;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .cart {
+            background-color: #1c1c1c;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #444444;
+            border-radius: 4px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item-details img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .cart-item-actions {
+            flex-shrink: 0;
+        }
+
+        .total-price {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            font-style: italic;
+            color: #cccccc;
+        }
+
+        .checkout-btn {
+            float: right;
+        }
+
+        .btn-primary {
+            background-color: #e50914;
+            border-color: #e50914;
+        }
+
+        .btn-primary:hover {
+            background-color: #bf0810;
+            border-color: #bf0810;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Shopping Cart <i class="fas fa-shopping-cart"></i></h1>
+            <nav>
+                <a class="btn btn-link text-white" href="{{ url_for('home') }}">Home <i class="fas fa-home"></i></a>
+                <a class="btn btn-link text-white" href="{{ url_for('recipes') }}">Recipes <i class="fas fa-utensils"></i></a>
+                <a class="btn btn-link text-white" href="{{ url_for('cart') }}">Cart <i class="fas fa-shopping-cart"></i></a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container mt-4">
+            <div class="cart">
+                {% if cart_items %}
+                    <ul class="list-group">
+                        {% for item in cart_items %}
+                            <li class="list-group-item bg-dark text-white">
+                                <div class="cart-item">
+                                    <div class="cart-item-details">
+                                        <img src="{{ url_for('static', filename=item.product.image_url) }}" alt="{{ item.product.name }}" class="img-fluid">
+                                        <div>
+                                            <h3>{{ item.product.name }}</h3>
+                                            <p>Quantity: {{ item.quantity }}</p>
+                                            <p>Price: {{ item.product.price }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="cart-item-actions">
+                                        <form action="{{ url_for('remove_from_cart', product_id=item.product.product_id) }}" method="post">
+                                            <button class="btn btn-outline-danger btn-sm" type="submit"><i class="fas fa-trash"></i> Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="total-price">
+                        <h3>Total Price: {{ total_price }}</h3>
+                        <a href="{{ url_for('checkout') }}" class="btn btn-primary checkout-btn"><i class="fas fa-credit-card"></i> Checkout</a>
+                    </div>
+                {% else %}
+                    <p class="empty-cart-msg">Your cart is empty.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <!-- Bootstrap JS and jQuery (for Bootstrap functionalities) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

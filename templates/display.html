@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #1c1c1e; /* Dark background */
+            color: #ffffff; /* Light text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .one {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .two {
+            width: 200px;
+            background-color: #b71c1c; /* Red theme */
+            padding: 20px;
+            height: 100vh; /* Full height sidebar */
+        }
+
+        .two h1 {
+            color: #ffffff; /* White text */
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .two ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .two ul li {
+            margin-bottom: 10px;
+        }
+
+        .two ul li a {
+            color: #ffffff; /* White links */
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .two ul li a:hover {
+            color: #ffd700; /* Gold color on hover */
+        }
+
+        .content {
+            width: calc(100% - 200px); /* Adjust for sidebar width */
+            padding: 20px;
+        }
+
+        .topbar {
+            background-color: #b71c1c; /* Red theme */
+            color: #ffffff; /* White text */
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .contentbar {
+            background-color: #333333; /* Darker content background */
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .contentbar h1, .contentbar h2 {
+            color: #ffffff; /* White text */
+            margin-bottom: 20px;
+        }
+
+        .border {
+            border: 1px solid #444444;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .worddark {
+            color: #ffffff; /* White text */
+        }
+    </style>
+</head>
+<body>
+    <div class="one">
+        <div class="two">
+            <h1>Side Bar</h1>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="active"><a href="{{ url_for('display') }}">Display</a></li>
+                <li><a href="{{ url_for('update') }}">Update</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+            </ul>
+        </div>
+        <div class="content" align="center">
+            <div class="topbar">
+                <h2>Welcome!! You are in Display Page!!</h2>
+            </div>
+            <div class="contentbar">
+                <h1>Your Details</h1>
+                {% block content %}
+                <div class="border">
+                    <table class="worddark">
+                        <tr>
+                            <td>Username:</td>
+                            <td>{{ account['username'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td>{{ account['password'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email ID:</td>
+                            <td>{{ account['email'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Organisation:</td>
+                            <td>{{ account['organisation'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td>{{ account['address'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>City:</td>
+                            <td>{{ account['city'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>State:</td>
+                            <td>{{ account['state'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Country:</td>
+                            <td>{{ account['country'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Postal code:</td>
+                            <td>{{ account['postalcode'] }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

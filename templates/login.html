@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        body {
+            background: url('static/images/3b926c567b3f455c5433810d9e90b9e6.jpg') no-repeat center center fixed; /* Add your background image here */
+            background-size: cover;
+            color: #ffffff; /* Light text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: fadeIn 1s ease-in-out;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .container {
+                display: flex;
+                width: 80%;
+                max-width: 1200px;
+                background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
+        .logincontent {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .logintop {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logintop h1 {
+            color: #ffffff; /* White text */
+        }
+
+        .loginbottom {
+            background-color: #333333; /* Darker content background */
+            padding: 20px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 400px; /* Set maximum width */
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .loginbottom .textbox {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #444444;
+            background-color: #1c1c1e; /* Dark background for input */
+            color: #ffffff; /* White text */
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .loginbottom .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #b71c1c; /* Red theme */
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .loginbottom .btn:hover {
+            background-color: #9a0007; /* Darker red on hover */
+        }
+
+        .worddark {
+            color: #ffffff; /* White text */
+            text-align: center;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .worddark a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .worddark a:hover {
+            text-decoration: underline;
+        }
+
+        .welcome {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .welcome h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .welcome p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logincontent">
+            <div class="loginbottom">
+                <div class="logintop">
+                    <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
+                </div>
+                <form action="{{ url_for('login') }}" method="post" autocomplete="off">
+                    <div class="msg">{{ msg }}</div>
+                    <div>
+                        <label for="username"><i class="fas fa-user"></i></label>
+                        <input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required><br><br>
+                    </div>
+                    <div>
+                        <label for="password"><i class="fas fa-lock"></i></label>
+                        <input type="password" name="password" placeholder="Enter Your Password" class="textbox" id="password" required><br><br>
+                    </div>
+                    <input type="submit" class="btn" value="Login">
+                </form><br><br>
+                <p class="worddark">New to this page? <a class="worddark" href="{{ url_for('register') }}">Register here <i class="fas fa-user-plus"></i></a></p>
+                
+                <!-- Admin Login Button -->
+                <a href="{{ url_for('admin_login') }}" class="btn btn-danger btn-block mt-3">Admin Login</a>
+            </div>
+        </div>
+        <div class="welcome">
+            <h2>Welcome to Licious</h2>
+            <p>Hi, welcome to the Licious app where you can buy the best quality meat from us. Enjoy a seamless shopping experience and get fresh meat delivered to your doorstep.</p>
+        </div>
+    </div>
+
+    <!-- Font Awesome Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>

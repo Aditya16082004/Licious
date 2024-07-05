@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Recipe</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Recipe</h2>
+        <form method="POST" action="{{ url_for('admin_update_recipe', recipe_id=recipe['recipe_id']) }}">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ recipe['title'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required>{{ recipe['description'] }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="ingredients">Ingredients:</label>
+                <textarea class="form-control" id="ingredients" name="ingredients" rows="5" required>{{ recipe['ingredients'] }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="instructions">Instructions:</label>
+                <textarea class="form-control" id="instructions" name="instructions" rows="5" required>{{ recipe['instructions'] }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Products</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            color: #333; /* Dark text color */
+        }
+        .container {
+            margin-top: 30px;
+        }
+        h2 {
+            color: #00bfa5; /* Aquamarine Blue */
+            font-weight: bold;
+        }
+        .btn-success {
+            background-color: #ff4081; /* Fuschian */
+            border-color: #ff4081; /* Fuschian */
+        }
+        .btn-success:hover {
+            background-color: #e91e63; /* Darker Fuschian */
+            border-color: #e91e63; /* Darker Fuschian */
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            background-color: #fff; /* White background for cards */
+            margin-bottom: 20px;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-title {
+            color: #ff4081; /* Fuschian */
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #00bfa5; /* Aquamarine Blue */
+            border-color: #00bfa5; /* Aquamarine Blue */
+        }
+        .btn-primary:hover {
+            background-color: #00897b; /* Darker Aquamarine */
+            border-color: #00897b; /* Darker Aquamarine */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Product List</h2>
+        <a href="{{ url_for('admin_add_product') }}" class="btn btn-success mb-3">Add New Product</a>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4">
+                    <div class="card product-card mb-4">
+                        <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}" class="card-img-top product-image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product['name'] }}</h5>
+                            <p class="card-text">{{ product['description'] }}</p>
+                            <p class="card-text"><strong>Price:</strong> ${{ product['price'] }}</p>
+                            <a href="{{ url_for('admin_update_product', product_id=product['product_id']) }}" class="btn btn-primary">Update</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #f0f0f5; /* Light grey background */
+            color: #4b4b7c; /* Lavender grey text color */
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #4b4b7c; /* Lavender grey */
+        }
+        .btn-primary {
+            background-color: #6f6fcf;
+            border-color: #6f6fcf;
+        }
+        .btn-primary:hover {
+            background-color: #5c5cad;
+            border-color: #5c5cad;
+        }
+        .btn-secondary {
+            margin-top: 10px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .input-group-text {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            border-right: none;
+        }
+        .form-control {
+            border-left: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2><i class="bi bi-shield-lock-fill"></i> Admin Login</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    </div>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+        </form>
+        <p class="text-danger mt-3">{{ msg }}</p>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary btn-block"><i class="bi bi-person"></i> User Login</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

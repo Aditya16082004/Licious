@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #e6ffee; /* Light background */
+            color: #333333; /* Dark text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .one {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .two {
+            background-color: #333333; /* Dark sidebar background */
+            color: #ffffff; /* Light text color */
+            padding: 20px;
+            width: 200px;
+            min-height: 100%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .two h1 {
+            color: #b71c1c; /* Red heading */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .two ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .two ul li {
+            margin-bottom: 10px;
+        }
+
+        .two ul li a {
+            color: #ffffff; /* White link text */
+            text-decoration: none;
+        }
+
+        .two ul li a:hover {
+            color: #b71c1c; /* Red on hover */
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .topbar {
+            background-color: #b71c1c; /* Red top bar */
+            color: #ffffff; /* White text */
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .topbar h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .contentbar {
+            background-color: #ffffff; /* White content background */
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .textbox {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc; /* Light border */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #b71c1c; /* Red button */
+            border: none;
+            color: #ffffff; /* White text */
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #9a0007; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="one">
+        <div class="two">
+            <h1>Side Bar</h1>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('display') }}">Display</a></li>
+                <li class="active"><a href="{{ url_for('update') }}">Update</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="topbar">
+                <h2>Welcome!! You are in Update Page!!</h2>
+            </div>
+            <div class="contentbar">
+                <h1>Fill Your Details to Update</h1><br>
+                <form action="{{ url_for('update') }}" method="post" autocomplete="off">
+                    <div class="msg">{{ msg }}</div>
+                    <input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required><br><br>
+                    <input type="password" name="password" placeholder="Enter Your Password" class="textbox" id="password" required><br><br>
+                    <input type="email" name="email" placeholder="Enter Your Email ID" class="textbox" id="email" required><br><br>
+                    <input type="text" name="organisation" placeholder="Enter Your Organisation" class="textbox" id="organisation" required><br><br>
+                    <input type="text" name="address" placeholder="Enter Your Address" class="textbox" id="address" required><br><br>
+                    <input type="text" name="city" placeholder="Enter Your City" class="textbox" id="city" required><br><br>
+                    <input type="text" name="state" placeholder="Enter Your State" class="textbox" id="state" required><br><br>
+                    <input type="text" name="country" placeholder="Enter Your Country" class="textbox" id="country" required><br><br>
+                    <input type="text" name="postalcode" placeholder="Enter Your Postal Code" class="textbox" id="postalcode" required><br><br>
+                    <input type="submit" class="btn" value="Update">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

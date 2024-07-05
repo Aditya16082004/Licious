@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Users</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .user-card {
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #F0F8FF; /* Alice Blue */
+        }
+        .user-card .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #000000; /* Black */
+        }
+        .user-card .card-text {
+            color: #666666; /* Dark Grey */
+        }
+        .user-card .fa-user,
+        .user-card .fa-envelope,
+        .user-card .fa-building,
+        .user-card .fa-map-marker-alt {
+            margin-right: 5px;
+            color: #006400; /* Dark Green */
+        }
+        .user-card .fa-city {
+            color: #87CEEB; /* Sky Blue */
+        }
+        .user-card .fa-flag {
+            color: #FF69B4; /* Hot Pink */
+        }
+        .user-card .fa-globe {
+            color: #800000; /* Maroon */
+        }
+        .user-card .fa-envelope-open-text {
+            color: #9370DB; /* Medium Purple */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>User List</h2>
+        <div class="row">
+            {% for user in users %}
+            <div class="col-md-4">
+                <div class="user-card">
+                    <h5 class="card-title"><i class="fas fa-id-card"></i> ID: {{ user['id'] }}</h5>
+                    <p class="card-text"><i class="fas fa-user"></i> Username: {{ user['username'] }}</p>
+                    <p class="card-text"><i class="fas fa-envelope"></i> Email: {{ user['email'] }}</p>
+                    <p class="card-text"><i class="fas fa-building"></i> Organisation: {{ user['organisation'] }}</p>
+                    <p class="card-text"><i class="fas fa-map-marker-alt"></i> Address: {{ user['address'] }}</p>
+                    <p class="card-text"><i class="fas fa-city"></i> City: {{ user['city'] }}</p>
+                    <p class="card-text"><i class="fas fa-flag"></i> State: {{ user['state'] }}</p>
+                    <p class="card-text"><i class="fas fa-globe"></i> Country: {{ user['country'] }}</p>
+                    <p class="card-text"><i class="fas fa-envelope-open-text"></i> Postal Code: {{ user['postalcode'] }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

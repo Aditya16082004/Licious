@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Recipes</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://kit.fontawesome.com/a076d05399.js">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styling for icons and colors */
+        .card-title {
+            color: #ffffff; /* White */
+            background-color: #ff726f; /* Cherry Red & Off-White */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            color: #000000; /* Black */
+            background-color: #ffffff; /* White */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .btn-primary {
+            background-color: #87ceeb; /* Sky Blue & Bubblegum Pink */
+            border-color: #87ceeb;
+        }
+        .btn-danger {
+            background-color: #8b0000; /* Dark Red */
+            border-color: #8b0000;
+        }
+        .btn-success {
+            background-color: #90ee90; /* Light Green */
+            color: #000000; /* Black */
+            border-color: #90ee90;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Recipes</h2>
+        <a href="{{ url_for('admin_add_recipe') }}" class="btn btn-success mb-3">
+            <i class="fas fa-plus-circle"></i> Add New Recipe
+        </a>
+        <div class="row">
+            {% for recipe in recipes %}
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recipe['title'] }}</h5>
+                            <p class="card-text">{{ recipe['description'] }}</p>
+                            <div class="btn-group">
+                                <a href="{{ url_for('admin_update_recipe', recipe_id=recipe['recipe_id']) }}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Update
+                                </a>
+                                <form action="{{ url_for('admin_delete_recipe', recipe_id=recipe['recipe_id']) }}" method="post" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

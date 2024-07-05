@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes - Licious</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background-color: #2b2b2b;
+            color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .recipe-card {
+            background-color: #3c3c3c;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .recipe-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .recipe-card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .recipe-card .card-body {
+            padding: 20px;
+        }
+
+        .recipe-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .recipe-card p {
+            margin-bottom: 0;
+        }
+        /* Additional styles for the chatbot button */
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-size: 20px;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Recommended Recipes <i class="fas fa-utensils"></i></h1>
+            <nav>
+                <a class="btn btn-link text-white" href="{{ url_for('home') }}">Home <i class="fas fa-home"></i></a>
+                <a class="btn btn-link text-white" href="{{ url_for('recipes') }}">Recipes <i class="fas fa-utensils"></i></a>
+                <a class="btn btn-link text-white" href="{{ url_for('cart') }}">Cart <i class="fas fa-shopping-cart"></i></a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container mt-4">
+            <div class="row">
+                {% for recipe in recipes %}
+                <div class="col-md-6">
+                    <div class="card recipe-card">
+                        
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="{{ url_for('recipe_details', recipe_id=recipe.recipe_id) }}" class="text-white">{{ recipe.title }}</a></h3>
+                            <p class="card-text">{{ recipe.description }}</p>
+                            <div class="text-right">
+                                <a href="{{ url_for('recipe_details', recipe_id=recipe.recipe_id) }}" class="btn btn-primary"><i class="fas fa-book-open"></i> View Recipe</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <!-- Chatbot button -->
+    <a href="{{ url_for('chat') }}" class="chatbot-button">
+        <i class="fas fa-comment-alt"></i>
+    </a>
+    
+    <!-- Bootstrap JS and jQuery (for Bootstrap functionalities) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- admin_add_product.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ 'Update Product' if product else 'Add New Product' }}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>{{ 'Update Product' if product else 'Add New Product' }}</h2>
+        <form method="POST" action="{{ url_for('admin_update_product', product_id=product['product_id']) if product else url_for('admin_add_product') }}">
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ product['name'] if product else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required>{{ product['description'] if product else '' }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{ product['price'] if product else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" class="form-control" id="category" name="category" value="{{ product['category'] if product else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="dietary_preference">Dietary Preference</label>
+                <input type="text" class="form-control" id="dietary_preference" name="dietary_preference" value="{{ product['dietary_preference'] if product else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="image_url">Image URL</label>
+                <input type="url" class="form-control" id="image_url" name="image_url" value="{{ product['image_url'] if product else '' }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ 'Update' if product else 'Submit' }}</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

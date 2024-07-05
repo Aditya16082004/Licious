@@ -1,0 +1,17 @@
+<h2>Payment History</h2>
+<table>
+  <tr>
+    <th>Order ID</th>
+    <th>Date</th>
+    <th>Total Price</th>
+    <th>Items</th>
+    <th>Delivery Address</th>
+  </tr>
+  {% for order in orders %}
+  <tr>
+    <td>{{ order.id }}</td>
+    <td>{{ order.created_at }}</td>  <td>{{ order.total_price }}</td>
+    <td>{{ order.items }}</td>  <td>{{ order.delivery_address }}</td>
+  </tr>
+  {% endfor %}
+</table>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.title }}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background-color: #2b2b2b;
+            color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        article {
+            background-color: #3c3c3c;
+            color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{{ recipe.title }} <i class="fas fa-utensils"></i></h1>
+            <nav>
+                <a class="btn btn-link text-white" href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+                <a class="btn btn-link text-white" href="{{ url_for('recipes') }}"><i class="fas fa-utensils"></i> Recipes</a>
+                <a class="btn btn-link text-white" href="{{ url_for('cart') }}"><i class="fas fa-shopping-cart"></i> Cart</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <article>
+                <h2>Description</h2>
+                <p>{{ recipe.description }}</p>
+                
+                <h2>Ingredients <i class="fas fa-carrot"></i></h2>
+                <ul>
+                    {% for ingredient in recipe.ingredients.split(',') %}
+                    <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+                
+                <h2>Instructions <i class="fas fa-book-open"></i></h2>
+                <p>{{ recipe.instructions }}</p>
+            </article>
+        </div>
+    </main>
+    <!-- Bootstrap JS and jQuery (for Bootstrap functionalities) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

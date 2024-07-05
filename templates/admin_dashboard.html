@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h2 {
+            color: #00bfa5; /* Aquamarine Blue */
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .btn-info {
+            background-color: #ff4081; /* Fuschian */
+            border-color: #ff4081; /* Fuschian */
+            color: white;
+        }
+        .btn-info:hover {
+            background-color: #e91e63; /* Darker Fuschian */
+            border-color: #e91e63; /* Darker Fuschian */
+        }
+        .btn-danger {
+            margin-top: 20px;
+        }
+        .btn i {
+            margin-right: 8px;
+        }
+        .stats-card {
+            border: 1px solid #333333; /* Darker border */
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+            min-height: 150px; /* Adjust as needed */
+            transition: all 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .stats-card .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #ffffff; /* White text */
+        }
+        .stats-card .number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ffffff; /* White text */
+        }
+        /* Theme-specific styles for statistics cards */
+        .cherry-red-off-white {
+            background-color: #8b0000; /* Dark Red */
+        }
+        .baby-blue-white {
+            background-color: #4682b4; /* Steel Blue */
+        }
+        .dark-blue-light-blue {
+            background-color: #00008b; /* Dark Blue */
+        }
+        .sky-blue-bubblegum-pink {
+            background-color: #1e90ff; /* Dodger Blue */
+        }
+        .cherry-red-bubblegum-pink {
+            background-color: #ff69b4; /* Hot Pink */
+        }
+        .forest-green-moss-green {
+            background-color: #006400; /* Dark Green */
+        }
+        .midnight-blue-royal-blue-burgundy-red {
+            background-color: #800080; /* Purple */
+        }
+        .terracotta-red-light-beige-muted-teal {
+            background-color: #8b4513; /* Saddle Brown */
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h2>Admin Dashboard</h2>
+
+        <!-- Statistics Cards -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card cherry-red-off-white">
+                    <h5 class="card-title"><i class="fas fa-box"></i> Products</h5>
+                    <p class="number">{{ product_count }}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card baby-blue-white">
+                    <h5 class="card-title"><i class="fas fa-utensils"></i> Recipes</h5>
+                    <p class="number">{{ recipe_count }}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card dark-blue-light-blue">
+                    <h5 class="card-title"><i class="fas fa-users"></i> Users</h5>
+                    <p class="number">{{ user_count }}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card sky-blue-bubblegum-pink">
+                    <h5 class="card-title"><i class="fas fa-shopping-cart"></i> Orders</h5>
+                    <p class="number">{{ order_count }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Links -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4 mb-3">
+                <a href="{{ url_for('admin_products') }}" class="btn btn-info btn-block">
+                    <i class="fas fa-box"></i> Manage Products
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{{ url_for('admin_recipe') }}" class="btn btn-info btn-block">
+                    <i class="fas fa-utensils"></i> Manage Recipes
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{{ url_for('admin_orders') }}" class="btn btn-info btn-block">
+                    <i class="fas fa-shopping-cart"></i> View Orders
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{{ url_for('admin_users') }}" class="btn btn-info btn-block">
+                    <i class="fas fa-users"></i> Manage Users
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-danger btn-block">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and Font Awesome JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
