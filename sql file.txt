@@ -1,0 +1,183 @@
+DESCRIBE project.users;
+DESCRIBE project.products;
+DESCRIBE project.recipes;
+DESCRIBE project.orders;
+DESCRIBE project.accounts;
+DESCRIBE project.customers;
+
+CREATE TABLE IF NOT EXISTS project.products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    category VARCHAR(50),
+    description TEXT,
+    price DECIMAL(10,2),
+    dietary_preference VARCHAR(255)
+);
+
+
+
+CREATE TABLE recipes (
+    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    ingredients TEXT,
+    instructions TEXT
+);
+
+
+-- Insert sample data into recipes table
+INSERT INTO project.recipes (title, ingredients, instructions, description) VALUES
+('Grilled Chicken Salad', '[1, 4]', '...', 'low-carb'),
+('Baked Salmon with Lemon', '[2]', '...', NULL),
+('Stir-Fried Tofu with Vegetables', '[5]', '...', 'vegetarian');
+
+CREATE TABLE IF NOT EXISTS project.users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    dietary_preferences VARCHAR(100)
+);
+
+-- Insert sample data into users table
+INSERT INTO project.users (username, password_hash, email, dietary_preferences) VALUES
+('user1', 'password_hash_1', 'user1@example.com', NULL),
+('user2', 'password_hash_2', 'user2@example.com', NULL);
+
+SELECT * FROM project.products;
+SELECT * FROM project.recipes;
+SELECT * FROM project.users;
+
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    address VARCHAR(255)
+);
+
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    items TEXT NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL,
+    delivery_address VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+CREATE TABLE accounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    organisation VARCHAR(100),
+    address VARCHAR(255),
+    city VARCHAR(100),
+    state VARCHAR(100),
+    country VARCHAR(100),
+    postalcode VARCHAR(20)
+);
+
+INSERT INTO accounts (username, password, email, organisation, address, city, state, country, postalcode) VALUES
+('user1', 'password1', 'user1@example.com', 'Organisation1', 'Address1', 'City1', 'State1', 'Country1', '12345'),
+('user2', 'password2', 'user2@example.com', 'Organisation2', 'Address2', 'City2', 'State2', 'Country2', '67890');
+
+SELECT * FROM accounts;
+SELECT * FROM orders;
+SELECT * FROM customers;
+
+ALTER TABLE products ADD COLUMN price DECIMAL(10, 2) NOT NULL;
+
+CREATE TABLE IF NOT EXISTS recipes (
+    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    ingredients TEXT,
+    instructions TEXT
+);
+DROP TABLE IF EXISTS recipes;
+
+CREATE TABLE recipes (
+    recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    ingredients TEXT,
+    instructions TEXT
+);
+select * from recipes;
+
+INSERT INTO products (name, category, description, price, dietary_preference, image_url)
+VALUES
+    ('Vegetarian Burger Patties', 'Vegetarian', 'Plant-based burger patties made from vegetables and grains.', 150.00, 'Vegetarian', 'https://example.com/images/vegetarian-burger.jpg'),
+    ('Soy Sausages', 'Vegetarian', 'Soy-based sausages with herbs and spices, suitable for grilling or frying.', 120.00, 'Vegetarian', 'https://example.com/images/soy-sausages.jpg'),
+    ('Tofu Steaks', 'Vegetarian', 'Firm tofu steaks marinated and ready for grilling or stir-frying.', 180.00, 'Vegetarian', 'https://example.com/images/tofu-steaks.jpg'),
+    ('Seitan Strips', 'Vegetarian', 'Wheat gluten strips seasoned and ideal for stir-frying or adding to curries.', 160.00, 'Vegetarian', 'https://example.com/images/seitan-strips.jpg'),
+    ('Mushroom Jerky', 'Vegetarian', 'Dried mushroom strips seasoned with savory spices, a nutritious snack.', 100.00, 'Vegetarian', 'https://example.com/images/mushroom-jerky.jpg'),
+
+    ('Beef Tenderloin', 'Beef', 'Tender and juicy cut of beef, perfect for grilling or roasting.', 850.00, 'Non-Veg', 'https://example.com/images/beef-tenderloin.jpg'),
+    ('Beef Burger', 'Beef', 'Juicy beef patty topped with fresh lettuce, tomatoes, and cheese in a sesame seed bun.', 350.00, 'Non-Veg', 'https://example.com/images/beef-burger.jpg'),
+    ('Beef Kebabs', 'Beef', 'Skewered beef kebabs marinated in spices, perfect for grilling.', 420.00, 'Non-Veg', 'https://example.com/images/beef-kebabs.jpg'),
+    ('Beef Stew', 'Beef', 'Hearty beef stew with tender chunks of beef, carrots, and potatoes in a rich broth.', 380.00, 'Non-Veg', 'https://example.com/images/beef-stew.jpg'),
+    ('Beef Ribs', 'Beef', 'Slow-cooked beef ribs glazed with barbecue sauce.', 480.00, 'Non-Veg', 'https://example.com/images/beef-ribs.jpg'),
+    ('Beef Meatballs', 'Beef', 'Homemade beef meatballs in marinara sauce.', 320.00, 'Non-Veg', 'https://example.com/images/beef-meatballs.jpg'),
+
+    ('Chicken Breast', 'Poultry', 'Boneless chicken breast, lean and versatile for grilling or roasting.', 300.00, 'Non-Veg', 'https://example.com/images/chicken-breast.jpg'),
+    ('Chicken Wings', 'Poultry', 'Chicken wings seasoned and ready for frying or baking.', 250.00, 'Non-Veg', 'https://example.com/images/chicken-wings.jpg'),
+    ('Chicken Drumsticks', 'Poultry', 'Chicken drumsticks marinated and ready for grilling or baking.', 280.00, 'Non-Veg', 'https://example.com/images/chicken-drumsticks.jpg'),
+    ('Chicken Thighs', 'Poultry', 'Chicken thighs with skin, perfect for roasting or braising.', 270.00, 'Non-Veg', 'https://example.com/images/chicken-thighs.jpg'),
+    ('Eggs', 'Poultry', 'Farm-fresh eggs, perfect for cooking and baking.', 5.00, 'Non-Veg', 'https://example.com/images/eggs.jpg'),
+
+    ('Pork Chops', 'Pork', 'Bone-in pork chops, perfect for grilling or pan-searing.', 200.00, 'None', 'https://example.com/images/pork-chops.jpg'),
+    ('Pork Ribs', 'Pork', 'Juicy pork ribs marinated and ready for slow cooking or barbecuing.', 250.00, 'None', 'https://example.com/images/pork-ribs.jpg'),
+    ('Pork Belly Slices', 'Pork', 'Slices of pork belly, ideal for roasting or braising.', 180.00, 'None', 'https://example.com/images/pork-belly-slices.jpg'),
+    ('Pork Tenderloin', 'Pork', 'Tender pork tenderloin, great for grilling or roasting.', 220.00, 'None', 'https://example.com/images/pork-tenderloin.jpg'),
+    ('Pork Sausages', 'Pork', 'Premium pork sausages with a blend of spices, perfect for grilling or breakfast.', 150.00, 'None', 'https://example.com/images/pork-sausages.jpg'),
+
+    ('Lamb Chops', 'Lamb', 'Tender lamb chops seasoned and ready for grilling or pan-searing.', 300.00, 'None', 'https://example.com/images/lamb-chops.jpg'),
+    ('Lamb Leg Roast', 'Lamb', 'Boneless lamb leg roast, perfect for roasting with herbs and spices.', 350.00, 'None', 'https://example.com/images/lamb-leg-roast.jpg'),
+    ('Lamb Shoulder Steaks', 'Lamb', 'Lamb shoulder steaks, ideal for marinating and grilling.', 280.00, 'None', 'https://example.com/images/lamb-shoulder-steaks.jpg'),
+    ('Lamb Ribs', 'Lamb', 'Juicy lamb ribs seasoned and ready for slow cooking or barbecuing.', 320.00, 'None', 'https://example.com/images/lamb-ribs.jpg'),
+    ('Ground Lamb', 'Lamb', 'Freshly ground lamb, versatile for making burgers, kebabs, or meatballs.', 250.00, 'None', 'https://example.com/images/ground-lamb.jpg'),
+
+    ('Salmon Fillet', 'Seafood', 'Fresh salmon fillet, rich in omega-3 fatty acids, ideal for grilling or baking.', 400.00, 'None', 'https://example.com/images/salmon-fillet.jpg'),
+    ('Shrimp', 'Seafood', 'Large shrimp, peeled and deveined, perfect for stir-fries or grilling.', 250.00, 'None', 'https://example.com/images/shrimp.jpg'),
+    ('Lobster Tail', 'Seafood', 'Lobster tail, sweet and succulent, great for steaming or grilling.', 600.00, 'None', 'https://example.com/images/lobster-tail.jpg'),
+    ('Crab Legs', 'Seafood', 'Snow crab legs, pre-cooked and ready to enjoy with melted butter.', 500.00, 'None', 'https://example.com/images/crab-legs.jpg'),
+    ('Calamari', 'Seafood', 'Calamari rings, lightly breaded and perfect for frying or grilling.', 300.00, 'None', 'https://example.com/images/calamari.jpg');
+
+INSERT INTO recipes (title, description, ingredients, instructions)
+VALUES
+('Pan-Seared Pork Chops', 'Bone-in pork chops, perfect for grilling or pan-searing.', 'Pork chops, Olive oil, Butter, Garlic, Fresh thyme, Salt, Black pepper', '1. Season pork chops with salt and black pepper. 2. Heat olive oil and butter in a skillet over medium-high heat. 3. Sear pork chops for 4-5 minutes on each side, or until golden brown and cooked through. 4. Add minced garlic and fresh thyme to the skillet during the last minute of cooking. 5. Remove pork chops from the skillet and let rest for a few minutes before serving.'),
+('Slow-Cooked Pork Ribs', 'Juicy pork ribs marinated and ready for slow cooking or barbecuing.', 'Pork ribs, Barbecue sauce, Brown sugar, Paprika, Garlic powder, Onion powder, Salt, Black pepper', '1. Rub pork ribs with paprika, garlic powder, onion powder, salt, and black pepper. 2. Place ribs in a large baking dish or roasting pan. 3. Cover tightly with foil and refrigerate for at least 4 hours, preferably overnight. 4. Preheat oven to 300°F (150°C). 5. Bake ribs for 2.5 to 3 hours, or until meat is tender and pulls away from the bones. 6. Remove ribs from oven and brush with barbecue sauce mixed with brown sugar. 7. Increase oven temperature to 400°F (200°C). 8. Return ribs to the oven and bake for another 15-20 minutes, or until sauce is caramelized. 9. Serve hot.'),
+('Crispy Pork Belly Slices', 'Slices of pork belly, ideal for roasting or braising.', 'Pork belly slices, Salt, Olive oil, Garlic, Fresh rosemary, Fresh thyme, Black pepper', '1. Preheat oven to 450°F (230°C). 2. Score pork belly skin with a sharp knife and pat dry with paper towels. 3. Rub salt all over pork belly slices. 4. Place pork belly slices on a baking sheet lined with parchment paper. 5. Drizzle olive oil over pork belly slices. 6. Add minced garlic, chopped fresh rosemary, chopped fresh thyme, and black pepper. 7. Roast for 30-40 minutes, or until pork belly skin is crispy and meat is cooked through. 8. Let rest for a few minutes before slicing and serving.'),
+('Grilled Pork Tenderloin', 'Tender pork tenderloin, great for grilling or roasting.', 'Pork tenderloin, Olive oil, Dijon mustard, Honey, Garlic, Fresh thyme, Salt, Black pepper', '1. Preheat grill to medium-high heat. 2. In a bowl, mix olive oil, Dijon mustard, honey, minced garlic, chopped fresh thyme, salt, and black pepper. 3. Brush pork tenderloin with the mixture. 4. Grill pork tenderloin for 15-20 minutes, turning occasionally, or until internal temperature reaches 145°F (63°C). 5. Remove from grill and let rest for 5 minutes before slicing.'),
+('Grilled Pork Sausages', 'Premium pork sausages with a blend of spices, perfect for grilling or breakfast.', 'Pork sausages, Olive oil, Salt, Black pepper, Fresh herbs (optional)', '1. Preheat grill to medium-high heat. 2. Brush pork sausages with olive oil and season with salt and black pepper. 3. Grill sausages for 10-12 minutes, turning occasionally, until fully cooked and browned. 4. Serve hot, optionally garnished with fresh herbs.'),
+('Grilled Lamb Chops', 'Tender lamb chops seasoned and ready for grilling or pan-searing.', 'Lamb chops, Olive oil, Garlic, Fresh rosemary, Fresh thyme, Salt, Black pepper', '1. Preheat grill to medium-high heat. 2. In a bowl, mix olive oil, minced garlic, chopped fresh rosemary, chopped fresh thyme, salt, and black pepper. 3. Rub lamb chops with the mixture. 4. Grill lamb chops for 3-4 minutes on each side, or until internal temperature reaches 145°F (63°C) for medium-rare. 5. Let lamb chops rest for a few minutes before serving.'),
+('Roast Lamb Leg', 'Boneless lamb leg roast, perfect for roasting with herbs and spices.', 'Lamb leg roast, Olive oil, Garlic, Fresh rosemary, Fresh thyme, Salt, Black pepper', '1. Preheat oven to 325°F (160°C). 2. In a small bowl, mix olive oil, minced garlic, chopped fresh rosemary, chopped fresh thyme, salt, and black pepper. 3. Rub lamb leg roast with the mixture, covering all sides. 4. Place lamb leg roast in a roasting pan. 5. Roast for 1.5 to 2 hours, or until internal temperature reaches 145°F (63°C) for medium-rare. 6. Let lamb leg roast rest for 15 minutes before slicing.'),
+('Grilled Lamb Shoulder Steaks', 'Lamb shoulder steaks, ideal for marinating and grilling.', 'Lamb shoulder steaks, Olive oil, Lemon juice, Garlic, Fresh oregano, Fresh thyme, Salt, Black pepper', '1. Preheat grill to medium-high heat. 2. In a bowl, mix olive oil, lemon juice, minced garlic, chopped fresh oregano, chopped fresh thyme, salt, and black pepper. 3. Rub lamb shoulder steaks with the mixture. 4. Grill lamb shoulder steaks for 4-5 minutes on each side, or until internal temperature reaches 145°F (63°C) for medium-rare. 5. Let lamb shoulder steaks rest for a few minutes before serving.'),
+('Barbecue Lamb Ribs', 'Juicy lamb ribs seasoned and ready for slow cooking or barbecuing.', 'Lamb ribs, Barbecue sauce, Brown sugar, Paprika, Garlic powder, Onion powder, Salt, Black pepper', '1. Preheat oven to 300°F (150°C). 2. Rub lamb ribs with paprika, garlic powder, onion powder, salt, and black pepper. 3. Wrap ribs tightly in foil and place on a baking sheet. 4. Bake for 2.5 to 3 hours, or until meat is tender and pulls away from the bones. 5. Remove ribs from foil and brush with barbecue sauce mixed with brown sugar. 6. Increase oven temperature to 400°F (200°C). 7. Return ribs to the oven and bake for another 15-20 minutes, or until sauce is caramelized. 8. Serve hot.'),
+('Lamb Kofta', 'Spiced ground lamb skewers, perfect for grilling or frying.', 'Ground lamb, Onion, Garlic, Fresh parsley, Ground cumin, Ground coriander, Paprika, Salt, Black pepper', '1. In a food processor, blend onion, minced garlic, chopped fresh parsley, ground cumin, ground coriander, paprika, salt, and black pepper until finely chopped. 2. Add ground lamb to the mixture and blend until combined. 3. Shape mixture into small cylinders or balls and thread onto skewers. 4. Preheat grill to medium-high heat. 5. Grill lamb kofta skewers for 8-10 minutes, turning occasionally, until fully cooked. 6. Serve hot with yogurt sauce and flatbread.'),
+('Grilled Salmon Fillet', 'Fresh salmon fillet, rich in omega-3 fatty acids, ideal for grilling or baking.', 'Salmon fillet, Olive oil, Lemon juice, Garlic, Fresh dill, Salt, Black pepper', '1. Preheat grill to medium-high heat. 2. In a bowl, mix olive oil, lemon juice, minced garlic, chopped fresh dill, salt, and black pepper. 3. Brush salmon fillet with the mixture. 4. Grill salmon fillet for 4-5 minutes on each side, or until fish flakes easily with a fork. 5. Remove from grill and let rest for a few minutes before serving.'),
+('Garlic Butter Shrimp', 'Large shrimp, peeled and deveined, perfect for stir-fries or grilling.', 'Shrimp, Butter, Olive oil, Garlic, Fresh parsley, Salt, Black pepper, Lemon wedges', '1. In a skillet, melt butter over medium-high heat. 2. Add olive oil and minced garlic to the skillet, cooking until fragrant. 3. Add shrimp to the skillet, cooking for 2-3 minutes per side, or until pink and cooked through. 4. Season with salt and black pepper to taste. 5. Garnish with chopped fresh parsley and serve hot with lemon wedges.'),
+('Broiled Lobster Tail', 'Fresh lobster tail, perfect for broiling or grilling.', 'Lobster tail, Butter, Lemon juice, Garlic powder, Paprika, Salt, Black pepper', '1. Preheat broiler to high heat. 2. Use kitchen shears to cut through the top shell of the lobster tail, stopping at the base of the tail. 3. Gently spread the shell apart and lift out the meat, keeping it attached at the base of the tail. 4. In a small bowl, mix melted butter, lemon juice, garlic powder, paprika, salt, and black pepper. 5. Brush butter mixture over lobster meat. 6. Place lobster tails on a baking sheet and broil for 5-6 minutes, or until lobster meat is opaque and lightly browned. 7. Serve hot with melted butter and lemon wedges.'),
+('Steamed Crab Legs', 'Snow crab legs, pre-cooked and ready for steaming or boiling.', 'Crab legs, Butter, Fresh parsley, Garlic powder, Paprika, Salt, Black pepper, Lemon wedges', '1. In a large pot with a steamer insert, bring 2 inches of water to a boil. 2. Place crab legs in the steamer insert and cover pot with a lid. 3. Steam crab legs for 5-7 minutes, or until heated through. 4. Melt butter in a small bowl and stir in chopped fresh parsley, garlic powder, paprika, salt, and black pepper. 5. Serve hot crab legs with melted butter and lemon wedges.'),
+('Grilled Squid (Calamari)', 'Fresh squid, great for grilling or frying.', 'Squid tubes, Olive oil, Garlic, Fresh parsley, Lemon juice, Salt, Black pepper', '1. Preheat grill to medium-high heat. 2. Rinse squid tubes under cold water and pat dry with paper towels. 3. In a bowl, mix olive oil, minced garlic, chopped fresh parsley, lemon juice, salt, and black pepper. 4. Brush squid tubes with the mixture. 5. Grill squid tubes for 2-3 minutes per side, or until opaque and grill marks appear. 6. Remove from grill and serve hot.');
+
+INSERT INTO recipes (title, description, ingredients, instructions) VALUES
+('Vegetarian Burger Patties', 'Plant-based burger patties made from vegetables and grains.', 'Chickpeas, Black beans, Oats, Onion, Garlic, Cumin, Paprika, Salt, Pepper, Olive oil', '1. Mash chickpeas and black beans in a bowl. 2. Add oats, chopped onion, minced garlic, cumin, paprika, salt, and pepper. 3. Mix well and form into patties. 4. Heat olive oil in a skillet over medium heat. 5. Cook patties for 4-5 minutes on each side, or until golden brown. 6. Serve in burger buns with your favorite toppings.'),
+('Soy Sausages', 'Soy-based sausages with herbs and spices, suitable for grilling or frying.', 'Textured soy protein, Water, Soy sauce, Garlic powder, Onion powder, Paprika, Thyme, Rosemary, Salt, Black pepper', '1. Mix textured soy protein with water and soy sauce until well combined. 2. Add garlic powder, onion powder, paprika, thyme, rosemary, salt, and black pepper. 3. Shape into sausages. 4. Heat oil in a skillet over medium heat. 5. Cook sausages for 6-8 minutes, turning occasionally, until browned and heated through.'),
+('Tofu Steaks', 'Firm tofu steaks marinated and ready for grilling or stir-frying.', 'Firm tofu, Soy sauce, Garlic, Ginger, Sesame oil, Rice vinegar, Maple syrup, Cornstarch, Green onions', '1. Press tofu to remove excess water, then slice into steaks. 2. Mix soy sauce, minced garlic, grated ginger, sesame oil, rice vinegar, and maple syrup. 3. Marinate tofu steaks in the mixture for at least 30 minutes. 4. Heat a grill or skillet over medium-high heat. 5. Coat tofu steaks with cornstarch and grill for 3-4 minutes per side, or until golden and crisp. 6. Serve hot, garnished with chopped green onions.'),
+('Seitan Strips', 'Wheat gluten strips seasoned and ideal for stir-frying or adding to curries.', 'Vital wheat gluten, Nutritional yeast, Soy sauce, Vegetable broth, Garlic powder, Onion powder, Paprika, Olive oil', '1. Mix vital wheat gluten, nutritional yeast, soy sauce, vegetable broth, garlic powder, onion powder, and paprika in a bowl. 2. Knead until a dough forms. 3. Cut dough into strips. 4. Heat olive oil in a skillet over medium heat. 5. Cook seitan strips for 3-4 minutes per side, or until golden brown. 6. Use in stir-fries, curries, or sandwiches.'),
+('Mushroom Jerky', 'Dried mushroom strips seasoned with savory spices, a nutritious snack.', 'Portobello mushrooms, Soy sauce, Liquid smoke, Garlic powder, Onion powder, Paprika, Maple syrup', '1. Slice portobello mushrooms thinly. 2. Mix soy sauce, liquid smoke, garlic powder, onion powder, paprika, and maple syrup in a bowl. 3. Marinate mushroom slices in the mixture for 30 minutes. 4. Preheat oven to 175°F (80°C). 5. Place mushroom slices on a baking sheet lined with parchment paper. 6. Bake for 2-3 hours, or until mushrooms are dried and chewy. 7. Cool completely before storing in an airtight container.'),
+('Beef Tenderloin with Red Wine Sauce', 'Tender and juicy cut of beef, perfect for grilling or roasting.', 'Beef tenderloin, Olive oil, Salt, Black pepper, Butter, Shallots, Garlic, Red wine, Beef broth, Fresh thyme', '1. Preheat oven to 425°F (220°C). 2. Rub beef tenderloin with olive oil, salt, and black pepper. 3. Heat a skillet over medium-high heat, then sear beef tenderloin on all sides until browned. 4. Transfer beef tenderloin to a roasting pan and roast in the oven for 25-30 minutes, or until desired doneness. 5. Remove beef tenderloin from the pan and let it rest. 6. In the same skillet, melt butter and sauté shallots and garlic until softened. 7. Deglaze with red wine, scraping up any browned bits. 8. Add beef broth and fresh thyme, simmer until sauce is reduced. 9. Slice beef tenderloin and serve with the red wine sauce.'),
+('Classic Beef Burger', 'Juicy beef patty topped with fresh lettuce, tomatoes, and cheese in a sesame seed bun.', 'Ground beef, Sesame seed buns, Lettuce, Tomato, Onion, Cheese slices, Ketchup, Mustard, Salt, Black pepper', '1. Divide ground beef into equal portions and shape into patties. 2. Season patties with salt and black pepper. 3. Heat a grill or skillet over medium-high heat. 4. Cook patties for 4-5 minutes on each side, or until fully cooked. 5. Toast sesame seed buns on the grill or skillet. 6. Assemble burgers with lettuce, tomato slices, onion slices, cheese slices, ketchup, and mustard. 7. Serve hot.'),
+('Beef Kebabs', 'Skewered beef kebabs marinated in spices, perfect for grilling.', 'Beef sirloin, Bell peppers, Red onion, Mushrooms, Olive oil, Garlic, Paprika, Cumin, Salt, Black pepper', '1. Cut beef sirloin into cubes. 2. In a bowl, mix olive oil, minced garlic, paprika, cumin, salt, and black pepper. 3. Marinate beef cubes for at least 1 hour. 4. Preheat grill to medium-high heat. 5. Thread marinated beef cubes onto skewers, alternating with bell peppers, red onion slices, and mushrooms. 6. Grill kebabs for 8-10 minutes, turning occasionally, until beef is cooked to desired doneness. 7. Serve hot.'),
+('Hearty Beef Stew', 'Hearty beef stew with tender chunks of beef, carrots, and potatoes in a rich broth.', 'Stewing beef, Carrots, Potatoes, Onion, Garlic, Beef broth, Tomato paste, Worcestershire sauce, Fresh thyme, Bay leaves, Salt, Black pepper', '1. Cut stewing beef into cubes. 2. Heat olive oil in a large pot over medium-high heat. 3. Sear beef cubes until browned on all sides, then remove and set aside. 4. Add chopped onion and minced garlic to the pot, cook until softened. 5. Stir in tomato paste and cook for another minute. 6. Return beef cubes to the pot, add beef broth, Worcestershire sauce, fresh thyme, bay leaves, salt, and black pepper. 7. Bring to a boil, then reduce heat and simmer for 1.5 to 2 hours, or until beef is tender. 8. Add carrots and potatoes, simmer for another 30 minutes or until vegetables are cooked through. 9. Serve hot.'),
+('Barbecue Beef Ribs', 'Slow-cooked beef ribs glazed with barbecue sauce.', 'Beef ribs, Barbecue sauce, Brown sugar, Paprika, Garlic powder, Onion powder, Salt, Black pepper', '1. Preheat oven to 300°F (150°C). 2. Rub beef ribs with paprika, garlic powder, onion powder, salt, and black pepper. 3. Wrap ribs tightly in foil and place on a baking sheet. 4. Bake for 2.5 to 3 hours, or until meat is tender and pulls away from the bones. 5. Remove ribs from foil and brush with barbecue sauce mixed with brown sugar. 6. Increase oven temperature to 400°F (200°C). 7. Return ribs to the oven and bake for another 15-20 minutes, or until sauce is caramelized. 8. Serve hot.'),
+('Homemade Beef Meatballs', 'Homemade beef meatballs in marinara sauce.', 'Ground beef, Bread crumbs, Parmesan cheese, Eggs, Garlic, Onion, Fresh parsley, Salt, Black pepper, Olive oil, Marinara sauce', '1. Preheat oven to 375°F (190°C). 2. In a bowl, mix ground beef, bread crumbs, grated Parmesan cheese, beaten eggs, minced garlic, chopped onion, chopped fresh parsley, salt, and black pepper. 3. Shape mixture into meatballs. 4. Heat olive oil in a large skillet over medium-high heat. 5. Brown meatballs on all sides, then transfer to a baking dish. 6. Pour marinara sauce over the meatballs. 7. Bake for 25-30 minutes, or until meatballs are cooked through. 8. Serve hot over pasta.'),
+('Grilled Chicken Breast', 'Boneless chicken breast, lean and versatile for grilling or roasting.', 'Chicken breasts, Olive oil, Lemon juice, Garlic powder, Onion powder, Paprika, Salt, Black pepper', '1. Preheat grill to medium-high heat. 2. In a bowl, mix olive oil, lemon juice, garlic powder, onion powder, paprika, salt, and black pepper. 3. Brush chicken breasts with the mixture. 4. Grill chicken breasts for 6-7 minutes per side, or until fully cooked. 5. Let chicken breasts rest for a few minutes before serving.'),
+('Crispy Baked Chicken Wings', 'Chicken wings seasoned and ready for frying or baking.', 'Chicken wings, Baking powder, Salt, Black pepper, Paprika, Garlic powder, Olive oil', '1. Preheat oven to 425°F (220°C). 2. Pat chicken wings dry with paper towels. 3. In a bowl, mix baking powder, salt, black pepper, paprika, and garlic powder. 4. Coat chicken wings with the mixture. 5. Arrange wings on a baking sheet lined with foil and greased with olive oil. 6. Bake for 40-45 minutes, flipping halfway through, until crispy and golden brown. 7. Serve hot.'),
+('Oven-Baked Chicken Drumsticks', 'Chicken drumsticks marinated and ready for grilling or baking.', 'Chicken drumsticks, Olive oil, Garlic powder, Onion powder, Paprika, Salt, Black pepper', '1. Preheat oven to 400°F (200°C). 2. In a bowl, toss chicken drumsticks with olive oil, garlic powder, onion powder, paprika, salt, and black pepper. 3. Arrange drumsticks on a baking sheet lined with parchment paper. 4. Bake for 35-40 minutes, or until chicken is golden brown and cooked through. 5. Let rest for a few minutes before serving.'),
+('Braised Chicken Thighs', 'Chicken thighs with skin, perfect for roasting or braising.', 'Chicken thighs, Olive oil, Onion, Garlic, Chicken broth, White wine, Fresh thyme, Salt, Black pepper', '1. Preheat oven to 375°F (190°C). 2. Season chicken thighs with salt and black pepper. 3. Heat olive oil in a large oven-safe skillet over medium-high heat. 4. Brown chicken thighs on both sides, then remove and set aside. 5. Add chopped onion and minced garlic to the skillet, cook until softened. 6. Deglaze with white wine, scraping up any browned bits. 7. Return chicken thighs to the skillet, add chicken broth and fresh thyme. 8. Cover and transfer to the oven. 9. Braise for 30-35 minutes, or until chicken is tender and cooked through. 10. Serve hot.'),
+('Scrambled Eggs', 'Farm-fresh eggs, perfect for cooking and baking.', 'Eggs, Butter, Salt, Black pepper, Fresh chives (optional)', '1. Crack eggs into a bowl and whisk until well beaten. 2. In a non-stick skillet, melt butter over medium heat. 3. Pour beaten eggs into the skillet and let cook without stirring for a few seconds. 4. Using a spatula, gently push the cooked edges toward the center of the skillet, allowing uncooked eggs to flow to the edges. 5. Continue cooking and gently stirring until eggs are just set and slightly creamy. 6. Season with salt and black pepper to taste. 7. Garnish with fresh chives if desired and serve hot.');
+
