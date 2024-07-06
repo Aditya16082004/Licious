@@ -1,1 +1,1 @@
-I built a cool meat delivery app! You can browse through all the different cuts of meat, sausages, and maybe even some seafood, all in one place. Once you find something delicious, you can add it to your cart and place your order. The app even remembers your info so ordering is a breeze. On the backend, I used Flask to handle everything and make it run smoothly, and MySQL to keep track of all the yummy meats and orders. Pretty neat, right? (And hey, if you were feeling super ambitious, I might have even added a secret admin panel to manage everything behind the scenes!)
+
